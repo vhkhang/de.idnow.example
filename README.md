@@ -44,7 +44,7 @@ The SLA is calculated as follows:
 
 Your task:
 - Implement a REST interface with 2 routes
-	- POST /api/v1/startIdentification: Here you can POST a identification object which is than added to the current list of open identifications
+	- POST /api/v1/startIdentification: Here you can POST a identification object which is then added to the current list of open identifications
 	- GET /api/v1/pendingIdentifications: Here you can get a list of identifications. The identifications should be ordered in the optimal order regarding the SLA of the company, the waiting time of the ident and the current SLA percentage of that company. More urgent idents come first.
 - Implement a unit test which tests a list of identifications to check wether the correct order is returned
 
@@ -92,3 +92,9 @@ Bonus task:
 - Check the test/RestController.Test.java for an example test
 - Check the conf/routes for the REST routes
 - Check the app/controllers/RestController.java for the stubs for the REST interface
+
+##How to turn in the assignment
+
+- Clone this Github repository
+- Check in your code
+- Create a pull request against this Github repository
