@@ -1,3 +1,4 @@
+package de.idnow.example.rest.controllers;
 import org.junit.*;
 
 import play.mvc.*;

@@ -3,10 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-POST    /api/v1/addCompany          controllers.RestController.addCompany()
-POST    /api/v1/startIdentification controllers.RestController.startIdentification()
-GET     /api/v1/identifications     controllers.RestController.identifications()
+GET     /                           de.idnow.example.rest.controllers.Application.index()
+POST    /api/v1/addCompany          de.idnow.example.rest.controllers.RestController.addCompany()
+POST    /api/v1/startIdentification de.idnow.example.rest.controllers.RestController.startIdentification()
+GET     /api/v1/identifications     de.idnow.example.rest.controllers.RestController.identifications()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

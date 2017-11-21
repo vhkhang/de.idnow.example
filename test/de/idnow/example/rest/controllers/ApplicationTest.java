@@ -1,3 +1,4 @@
+package de.idnow.example.rest.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
