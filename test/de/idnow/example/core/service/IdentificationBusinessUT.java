@@ -14,7 +14,7 @@ import de.idnow.example.core.entity.Identification;
 import de.idnow.example.core.exception.ResourceNotFoundException;
 import de.idnow.example.core.repository.CRUDService;
 import de.idnow.example.core.repository.TestCRUDService;
-import de.idnow.example.core.service.IdentificationBusiness;
+import de.idnow.example.core.service.IdentificationBusinessImpl;
 
 public class IdentificationBusinessUT {
 	private static final int ID = 1;
@@ -25,7 +25,7 @@ public class IdentificationBusinessUT {
 	private static final int COM_02 = 2;
 	private static final int IDENT_02 = 2;
 	
-	IdentificationBusiness identificationBusiness;
+	IdentificationBusinessImpl identificationBusiness;
 	CRUDService<Company> mockedCompanyService;
 	CRUDService<Identification> mockedIdentService;
 	
@@ -34,7 +34,7 @@ public class IdentificationBusinessUT {
 		mockedCompanyService = new TestCRUDService<Company>();
 		mockedIdentService = new TestCRUDService<Identification>();
 
-		this.identificationBusiness = new IdentificationBusiness(mockedCompanyService, mockedIdentService);
+		this.identificationBusiness = new IdentificationBusinessImpl(mockedCompanyService, mockedIdentService);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

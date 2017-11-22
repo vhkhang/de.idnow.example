@@ -3,6 +3,7 @@ package de.idnow.example.rest.controllers;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.inject.Inject;
 
 import de.idnow.example.common.util.JsonMapper;
 import de.idnow.example.core.entity.Company;
@@ -18,11 +19,7 @@ public class RestController extends Controller {
 	private CompanyBusiness companyBus;
 	private IdentificationBusiness identBus;
 
-	public RestController() {
-		companyBus = new CompanyBusiness();
-		identBus = new IdentificationBusiness();
-	}
-
+	@Inject
 	public RestController(CompanyBusiness companyBus, IdentificationBusiness identBus) {
 		this.companyBus = companyBus;
 		this.identBus = identBus;

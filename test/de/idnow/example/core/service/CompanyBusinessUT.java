@@ -8,17 +8,17 @@ import org.junit.Test;
 import de.idnow.example.core.entity.Company;
 import de.idnow.example.core.repository.CRUDService;
 import de.idnow.example.core.repository.TestCRUDService;
-import de.idnow.example.core.service.CompanyBusiness;
+import de.idnow.example.core.service.CompanyBusinessImpl;
 
 public class CompanyBusinessUT {
 	private static final int ID = 1;
-	CompanyBusiness companyBusiness;
+	CompanyBusinessImpl companyBusiness;
 
 	@Before
 	public void init() {
 		CRUDService<Company> mockedCompanyService = new TestCRUDService<Company>();
 
-		this.companyBusiness = new CompanyBusiness(mockedCompanyService);
+		this.companyBusiness = new CompanyBusinessImpl(mockedCompanyService);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

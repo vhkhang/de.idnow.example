@@ -3,8 +3,11 @@ package de.idnow.example.core.repository;
 import java.util.List;
 import java.util.Optional;
 
+import com.google.inject.ImplementedBy;
+
 import de.idnow.example.core.entity.Entity;
 
+@ImplementedBy(CRUDServiceImpl.class)
 public interface CRUDService<T extends Entity> {
 	/**
 	 * Provide a service to insert entity into datasource then return flushed item
