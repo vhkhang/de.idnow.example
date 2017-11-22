@@ -26,12 +26,12 @@ public class IdentificationBusinessImpl implements IdentificationBusiness {
         @Override
         public int compare(Identification record1, Identification record2) {
             int c;
-            c = Integer.compare(record2.getWaiting_time(), record1.getWaiting_time());
+            c = Integer.compare(record2.getWaitingTime(), record1.getWaitingTime());
             if (c == 0)
-                c = Float.compare(record1.getCompany().getCurrent_sla_percentage(),
-                        record2.getCompany().getCurrent_sla_percentage());
+                c = Float.compare(record1.getCompany().getCurrentSlaPercentage(),
+                        record2.getCompany().getCurrentSlaPercentage());
             if (c == 0)
-                c = Integer.compare(record1.getCompany().getSla_time(), record2.getCompany().getSla_time());
+                c = Integer.compare(record1.getCompany().getSlaTime(), record2.getCompany().getSlaTime());
 
             return c;
         }
@@ -42,10 +42,10 @@ public class IdentificationBusinessImpl implements IdentificationBusiness {
         if (identification == null)
             throw new IllegalArgumentException("Cannot call start service for null object");
 
-        Optional<Company> relatedCompany = this.companyService.get(identification.getCompanyid());
+        Optional<Company> relatedCompany = this.companyService.get(identification.getCompanyId());
         if (!relatedCompany.isPresent()) {
             throw new ResourceNotFoundException(
-                    (String.format("Company with id %d is undefined", identification.getCompanyid())));
+                    (String.format("Company with id %d is undefined", identification.getCompanyId())));
         }
         identification.setCompany(relatedCompany.get());
         return identificationService.insert(identification);

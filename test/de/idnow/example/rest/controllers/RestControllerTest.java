@@ -40,7 +40,7 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company = Json.parse(
-                        "{\"id\": 1, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 1, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 WSResponse wsResponse = WS.url("http://localhost:3333/api/v1/addCompany").post(company).get(10000);
                 assertEquals(OK, wsResponse.getStatus());
             }
@@ -53,7 +53,7 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company = Json.parse(
-                        "{\"id\": 1, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 1, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 WSResponse wsResponse = WS.url("http://localhost:3333/api/v1/addCompany").post(company).get(10000);
                 Company result = JsonMapper.toObj(wsResponse.asJson(), Company.class).orElse(null);
                 assertNotNull(result);
@@ -68,7 +68,7 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode identification = Json.parse(
-                        "{\"id\": 1, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 10, \"companyid\": 1}");
+                        "{\"id\": 1, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 10, \"companyId\": 1}");
                 assertEquals(OK, WS.url("http://localhost:3333/api/v1/startIdentification").post(identification)
                         .get(10000).getStatus());
             }
@@ -83,7 +83,7 @@ public class RestControllerTest {
             public void run() {
 
                 JsonNode identification = Json.parse(
-                        "{\"id\": 1, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 10, \"companyid\": 1}");
+                        "{\"id\": 1, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 10, \"companyId\": 1}");
                 WSResponse wsResponse = WS.url("http://localhost:3333/api/v1/startIdentification").post(identification)
                         .get(10000);
                 Identification result = JsonMapper.toObj(wsResponse.asJson(), Identification.class).orElse(null);
@@ -101,23 +101,23 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company3 = Json.parse(
-                        "{\"id\": 3, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 3, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 assertEquals(WS.url("http://localhost:3333/api/v1/addCompany").post(company3).get(10000).getStatus(),
                         OK);
 
                 JsonNode i1 = Json.parse(
-                        "{\"id\": 10, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 3}");
+                        "{\"id\": 10, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 3}");
                 WS.url("http://localhost:3333/api/v1/startIdentification").post(i1).get(10000);
 
                 JsonNode i2 = Json.parse(
-                        "{\"id\": 11, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 45, \"companyid\": 3}");
+                        "{\"id\": 11, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 45, \"companyId\": 3}");
                 WS.url("http://localhost:3333/api/v1/startIdentification").post(i2).get(10000);
 
                 WSResponse response = callGetPendingIdentifications();
                 List<Identification> idens = JsonMapper.toObjects(response.asJson(), Identification.class);
                 assertTrue(!CollectionUtils.isEmpty(idens));
 
-                List<Identification> result2 = idens.stream().filter(ident -> ident.getCompanyid() == 3)
+                List<Identification> result2 = idens.stream().filter(ident -> ident.getCompanyId() == 3)
                         .collect(Collectors.toList());
                 assertEquals(2, result2.size());
                 assertEquals(11, result2.get(0).getId());
@@ -133,21 +133,21 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company1 = Json.parse(
-                        "{\"id\": 21, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 21, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 assertEquals(WS.url("http://localhost:3333/api/v1/addCompany").post(company1).get(10000).getStatus(),
                         OK);
 
                 JsonNode company2 = Json.parse(
-                        "{\"id\": 22, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.9}");
+                        "{\"id\": 22, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.9}");
                 assertEquals(WS.url("http://localhost:3333/api/v1/addCompany").post(company2).get(10000).getStatus(),
                         OK);
 
                 JsonNode i1 = Json.parse(
-                        "{\"id\": 21, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 21}");
+                        "{\"id\": 21, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 21}");
                 WS.url("http://localhost:3333/api/v1/startIdentification").post(i1).get(10000);
 
                 JsonNode i2 = Json.parse(
-                        "{\"id\": 22, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 22}");
+                        "{\"id\": 22, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 22}");
                 WS.url("http://localhost:3333/api/v1/startIdentification").post(i2).get(10000);
 
                 WSResponse response = callGetPendingIdentifications();
@@ -156,7 +156,7 @@ public class RestControllerTest {
                 assertTrue(!CollectionUtils.isEmpty(idens));
 
                 List<Identification> result = idens.stream()
-                        .filter(ident -> ident.getCompanyid() == 21 || ident.getCompanyid() == 22)
+                        .filter(ident -> ident.getCompanyId() == 21 || ident.getCompanyId() == 22)
                         .collect(Collectors.toList());
                 assertEquals(2, result.size());
                 assertEquals(22, result.get(0).getId());
@@ -172,19 +172,19 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company1 = Json.parse(
-                        "{\"id\": 31, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 31, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 assertEquals(callAddCompany(company1).getStatus(), OK);
 
                 JsonNode company2 = Json.parse(
-                        "{\"id\": 32, \"name\": \"Test Bank\", \"sla_time\": 120, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 32, \"name\": \"Test Bank\", \"slaTime\": 120, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 assertEquals(callAddCompany(company2).getStatus(), OK);
 
                 JsonNode i1 = Json.parse(
-                        "{\"id\": 31, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 31}");
+                        "{\"id\": 31, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 31}");
                 callAddIdentification(i1);
 
                 JsonNode i2 = Json.parse(
-                        "{\"id\": 32, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 32}");
+                        "{\"id\": 32, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 32}");
                 callAddIdentification(i2);
 
                 WSResponse response = callGetPendingIdentifications();
@@ -193,7 +193,7 @@ public class RestControllerTest {
                 assertTrue(!CollectionUtils.isEmpty(idens));
 
                 List<Identification> result = idens.stream()
-                        .filter(ident -> ident.getCompanyid() == 31 || ident.getCompanyid() == 32)
+                        .filter(ident -> ident.getCompanyId() == 31 || ident.getCompanyId() == 32)
                         .collect(Collectors.toList());
 
                 assertEquals(2, result.size());
@@ -211,19 +211,19 @@ public class RestControllerTest {
             @Override
             public void run() {
                 JsonNode company1 = Json.parse(
-                        "{\"id\": 41, \"name\": \"Test Bank\", \"sla_time\": 60, \"sla_percentage\": 0.9, \"current_sla_percentage\": 0.95}");
+                        "{\"id\": 41, \"name\": \"Test Bank\", \"slaTime\": 60, \"slaPercentage\": 0.9, \"currentSlaPercentage\": 0.95}");
                 assertEquals(callAddCompany(company1).getStatus(), OK);
 
                 JsonNode company2 = Json.parse(
-                        "{\"id\": 41, \"name\": \"Test Bank\", \"sla_time\": 120, \"sla_percentage\": 0.8, \"current_sla_percentage\": 0.8}");
+                        "{\"id\": 41, \"name\": \"Test Bank\", \"slaTime\": 120, \"slaPercentage\": 0.8, \"currentSlaPercentage\": 0.8}");
                 assertEquals(callAddCompany(company2).getStatus(), OK);
 
                 JsonNode i1 = Json.parse(
-                        "{\"id\": 41, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 45, \"companyid\": 41}");
+                        "{\"id\": 41, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 45, \"companyId\": 41}");
                 callAddIdentification(i1);
 
                 JsonNode i2 = Json.parse(
-                        "{\"id\": 42, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waiting_time\": 30, \"companyid\": 41}");
+                        "{\"id\": 42, \"name\": \"Peter Huber\", \"time\": 1435667215, \"waitingTime\": 30, \"companyId\": 41}");
                 callAddIdentification(i2);
 
                 WSResponse response = callGetPendingIdentifications();
@@ -232,7 +232,7 @@ public class RestControllerTest {
                 assertTrue(!CollectionUtils.isEmpty(idens));
 
                 List<Identification> result = idens.stream()
-                        .filter(ident -> ident.getCompanyid() == 41 || ident.getCompanyid() == 41)
+                        .filter(ident -> ident.getCompanyId() == 41 || ident.getCompanyId() == 41)
                         .collect(Collectors.toList());
 
                 assertEquals(2, result.size());

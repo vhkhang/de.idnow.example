@@ -6,19 +6,19 @@ public class Company implements Serializable, Entity {
     private static final long serialVersionUID = 1L;
     private int id;
     private String name;
-    private int sla_time;
-    private float sla_percentage;
-    private float current_sla_percentage;
+    private int slaTime;
+    private float slaPercentage;
+    private float currentSlaPercentage;
 
     public Company() {
     }
 
-    public Company(int id, String name, int sla_time, float sla_percentage, float current_sla_percentage) {
+    public Company(int id, String name, int slaTime, float slaPercentage, float currentSlaPercentage) {
         this.id = id;
         this.name = name;
-        this.sla_time = sla_time;
-        this.sla_percentage = sla_percentage;
-        this.current_sla_percentage = current_sla_percentage;
+        this.slaTime = slaTime;
+        this.slaPercentage = slaPercentage;
+        this.currentSlaPercentage = currentSlaPercentage;
     }
 
     public int getId() {
@@ -37,28 +37,28 @@ public class Company implements Serializable, Entity {
         this.name = name;
     }
 
-    public int getSla_time() {
-        return sla_time;
+    public int getSlaTime() {
+        return slaTime;
     }
 
-    public void setSla_time(int sla_time) {
-        this.sla_time = sla_time;
+    public void setSlaTime(int slaTime) {
+        this.slaTime = slaTime;
     }
 
-    public float getSla_percentage() {
-        return sla_percentage;
+    public float getSlaPercentage() {
+        return slaPercentage;
     }
 
-    public void setSla_percentage(float sla_percentage) {
-        this.sla_percentage = sla_percentage;
+    public void setSlaPercentage(float slaPercentage) {
+        this.slaPercentage = slaPercentage;
     }
 
-    public float getCurrent_sla_percentage() {
-        return current_sla_percentage;
+    public float getCurrentSlaPercentage() {
+        return currentSlaPercentage;
     }
 
-    public void setCurrent_sla_percentage(float current_sla_percentage) {
-        this.current_sla_percentage = current_sla_percentage;
+    public void setCurrentSlaPercentage(float currentSlaPercentage) {
+        this.currentSlaPercentage = currentSlaPercentage;
     }
 
 }

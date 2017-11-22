@@ -8,19 +8,19 @@ public class Identification implements Serializable, Entity {
     private int id;
     private String name;
     private Date time;
-    private int waiting_time;
-    private int companyid;
+    private int waitingTime;
+    private int companyId;
     private Company company;
 
     public Identification() {
     }
 
-    public Identification(int id, String name, Date time, int waiting_time, int companyid) {
+    public Identification(int id, String name, Date time, int waitingTime, int companyId) {
         this.id = id;
         this.name = name;
         this.time = time;
-        this.waiting_time = waiting_time;
-        this.companyid = companyid;
+        this.waitingTime = waitingTime;
+        this.companyId = companyId;
     }
 
     public Company getCompany() {
@@ -55,19 +55,19 @@ public class Identification implements Serializable, Entity {
         this.time = time;
     }
 
-    public int getWaiting_time() {
-        return waiting_time;
+    public int getWaitingTime() {
+        return waitingTime;
     }
 
-    public void setWaiting_time(int waiting_time) {
-        this.waiting_time = waiting_time;
+    public void setWaitingTime(int waitingTime) {
+        this.waitingTime = waitingTime;
     }
 
-    public int getCompanyid() {
-        return companyid;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompanyid(int companyid) {
-        this.companyid = companyid;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 }
