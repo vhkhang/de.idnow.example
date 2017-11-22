@@ -1,10 +1,10 @@
 package de.idnow.example.core.exception;
 
 public class ResourceNotFoundException extends Exception {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public ResourceNotFoundException(String msg) {
-		super(msg);
-	}
+    public ResourceNotFoundException(String msg) {
+        super(msg);
+    }
 
 }

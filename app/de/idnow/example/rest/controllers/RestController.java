@@ -16,42 +16,42 @@ import play.mvc.Result;
 
 public class RestController extends Controller {
 
-	@Inject
-	private CompanyBusiness companyBus;
-	
-	@Inject
-	private IdentificationBusiness identBus;
+    @Inject
+    private CompanyBusiness companyBus;
 
-	public Result startIdentification() {
-		// Get the parsed JSON data
-		JsonNode json = request().body().asJson();
-		Optional<Identification> identOpt = JsonMapper.toObj(json, Identification.class);
-		if (!identOpt.isPresent()) {
-			return badRequest("Bad request error");
-		}
-		Identification identification;
-		try {
-			identification = this.identBus.start(identOpt.get());
-		} catch (ResourceNotFoundException e) {
-			return badRequest(e.getMessage());
-		}
-		return ok(JsonMapper.toJson(identification));
-	}
+    @Inject
+    private IdentificationBusiness identBus;
 
-	public Result addCompany() {
-		// Get the parsed JSON data
-		JsonNode json = request().body().asJson();
-		Optional<Company> companyOpt = JsonMapper.toObj(json, Company.class);
-		if (!companyOpt.isPresent()) {
-			return badRequest("Bad request error");
-		}
+    public Result startIdentification() {
+        // Get the parsed JSON data
+        JsonNode json = request().body().asJson();
+        Optional<Identification> identOpt = JsonMapper.toObj(json, Identification.class);
+        if (!identOpt.isPresent()) {
+            return badRequest("Bad request error");
+        }
+        Identification identification;
+        try {
+            identification = this.identBus.start(identOpt.get());
+        } catch (ResourceNotFoundException e) {
+            return badRequest(e.getMessage());
+        }
+        return ok(JsonMapper.toJson(identification));
+    }
 
-		Company entity = this.companyBus.create(companyOpt.get());
-		return ok(JsonMapper.toJson(entity));
-	}
+    public Result addCompany() {
+        // Get the parsed JSON data
+        JsonNode json = request().body().asJson();
+        Optional<Company> companyOpt = JsonMapper.toObj(json, Company.class);
+        if (!companyOpt.isPresent()) {
+            return badRequest("Bad request error");
+        }
 
-	public Result identifications() {
-		return ok(JsonMapper.toJson(this.identBus.getAll()));
-	}
+        Company entity = this.companyBus.create(companyOpt.get());
+        return ok(JsonMapper.toJson(entity));
+    }
+
+    public Result identifications() {
+        return ok(JsonMapper.toJson(this.identBus.getAll()));
+    }
 
 }

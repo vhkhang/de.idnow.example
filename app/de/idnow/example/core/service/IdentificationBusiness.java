@@ -6,9 +6,7 @@ import de.idnow.example.core.entity.Identification;
 import de.idnow.example.core.exception.ResourceNotFoundException;
 
 public interface IdentificationBusiness {
+    Identification start(Identification identification) throws ResourceNotFoundException;
 
-	Identification start(Identification identification) throws ResourceNotFoundException;
-
-	List<Identification> getAll();
-
+    List<Identification> getAll();
 }

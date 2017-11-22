@@ -10,32 +10,32 @@ import de.idnow.example.core.entity.Entity;
 
 public class TestCRUDService<S extends Entity> implements CRUDService<S> {
 
-	private Map<Integer, S> data = new HashMap<>();
-	
-	@Override
-	public S insert(S obj) {
-		data.put(obj.getId(), obj);
-		return obj;
-	}
+    private Map<Integer, S> data = new HashMap<>();
 
-	@Override
-	public S update(S obj) {
-		return data.put(obj.getId(), obj);
-	}
+    @Override
+    public S insert(S obj) {
+        data.put(obj.getId(), obj);
+        return obj;
+    }
 
-	@Override
-	public Optional<S> get(int id) {
-		return Optional.ofNullable(data.get(id));
-	}
+    @Override
+    public S update(S obj) {
+        return data.put(obj.getId(), obj);
+    }
 
-	@Override
-	public List<S> getAll() {
-		return data.values().stream().collect(Collectors.toList());
-	}
+    @Override
+    public Optional<S> get(int id) {
+        return Optional.ofNullable(data.get(id));
+    }
 
-	@Override
-	public void delete(S obj) {
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public List<S> getAll() {
+        return data.values().stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public void delete(S obj) {
+        throw new UnsupportedOperationException();
+    }
 
 }
