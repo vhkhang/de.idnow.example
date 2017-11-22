@@ -7,13 +7,9 @@ import de.idnow.example.core.repository.CRUDService;
 
 public class CompanyBusinessImpl implements CompanyBusiness {
 	
+	@Inject
 	private CRUDService<Company> companyService;
 	
-	@Inject
-	public CompanyBusinessImpl(CRUDService<Company> companyService) {
-		this.companyService = companyService;
-	}
-
 	@Override
 	public Company create(Company company) {
 		if (company == null)

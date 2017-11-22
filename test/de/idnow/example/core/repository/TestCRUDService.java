@@ -1,6 +1,5 @@
 package de.idnow.example.core.repository;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import de.idnow.example.core.entity.Entity;
-import de.idnow.example.core.repository.CRUDService;
 
 public class TestCRUDService<S extends Entity> implements CRUDService<S> {
 

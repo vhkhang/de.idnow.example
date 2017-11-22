@@ -11,11 +11,16 @@ import de.idnow.example.core.entity.Company;
 import de.idnow.example.core.entity.Identification;
 import de.idnow.example.core.exception.ResourceNotFoundException;
 import de.idnow.example.core.repository.CRUDService;
-import de.idnow.example.core.repository.CRUDServiceImpl;
 
-public class IdentificationBusinessImpl implements IdentificationBusiness{
+public class IdentificationBusinessImpl implements IdentificationBusiness {
 
-	private static final Comparator<Identification> idenComparator = new Comparator<Identification>() {
+	@Inject
+	private CRUDService<Company> companyService;
+
+	@Inject
+	private CRUDService<Identification> identificationService;
+
+	private static final Comparator<Identification> IDENT_COMPARATOR = new Comparator<Identification>() {
 
 		@Override
 		public int compare(Identification record1, Identification record2) {
@@ -30,36 +35,11 @@ public class IdentificationBusinessImpl implements IdentificationBusiness{
 		}
 	};
 
-	private CRUDService<Company> companyService;
-	private CRUDService<Identification> identificationService;
-
-	/*public IdentificationBusinessImpl() {
-		companyService = new CRUDServiceImpl<Company>() {
-			@Override
-			protected Class<Company> forClass() {
-				return Company.class;
-			}
-		};
-		identificationService = new CRUDServiceImpl<Identification>() {
-			@Override
-			protected Class<Identification> forClass() {
-				return Identification.class;
-			}
-		};
-	}*/
-
-	@Inject
-	public IdentificationBusinessImpl(CRUDService<Company> companyService,
-			CRUDService<Identification> identificationService) {
-		this.companyService = companyService;
-		this.identificationService = identificationService;
-	}
-
 	@Override
 	public Identification start(Identification identification) throws ResourceNotFoundException {
-		if(identification == null) 
+		if (identification == null)
 			throw new IllegalArgumentException("Cannot call start service for null object");
-		
+
 		Optional<Company> relatedCompany = this.companyService.get(identification.getCompanyid());
 		if (!relatedCompany.isPresent()) {
 			throw new ResourceNotFoundException(
@@ -72,7 +52,7 @@ public class IdentificationBusinessImpl implements IdentificationBusiness{
 	@Override
 	public List<Identification> getAll() {
 		List<Identification> result = identificationService.getAll();
-		Collections.sort(result, idenComparator);
+		Collections.sort(result, IDENT_COMPARATOR);
 		return result;
 	}
 }

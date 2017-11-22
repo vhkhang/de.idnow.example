@@ -2,25 +2,43 @@ package de.idnow.example.core.service;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.TypeLiteral;
 
 import de.idnow.example.core.entity.Company;
 import de.idnow.example.core.repository.CRUDService;
 import de.idnow.example.core.repository.TestCRUDService;
-import de.idnow.example.core.service.CompanyBusinessImpl;
 
 public class CompanyBusinessUT {
 	private static final int ID = 1;
 	CompanyBusinessImpl companyBusiness;
-
-	@Before
-	public void init() {
-		CRUDService<Company> mockedCompanyService = new TestCRUDService<Company>();
-
-		this.companyBusiness = new CompanyBusinessImpl(mockedCompanyService);
-	}
 	
+	private Injector injector;
+	
+	@Before
+	public void setUp() throws Exception {
+		injector = Guice.createInjector(new AbstractModule() {
+			
+			@Override
+			protected void configure() {
+				 bind(new TypeLiteral<CRUDService<Company>>(){})
+			      .to(new TypeLiteral<TestCRUDService<Company>>(){});
+			}
+		});
+		this.companyBusiness = injector.getInstance(CompanyBusinessImpl.class);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		injector = null;
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void create_withNull_shouldThrowIllegalArgumentException(){
 		this.companyBusiness.create(null);

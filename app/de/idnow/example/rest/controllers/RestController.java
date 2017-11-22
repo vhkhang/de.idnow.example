@@ -16,14 +16,11 @@ import play.mvc.Result;
 
 public class RestController extends Controller {
 
-	private CompanyBusiness companyBus;
-	private IdentificationBusiness identBus;
-
 	@Inject
-	public RestController(CompanyBusiness companyBus, IdentificationBusiness identBus) {
-		this.companyBus = companyBus;
-		this.identBus = identBus;
-	}
+	private CompanyBusiness companyBus;
+	
+	@Inject
+	private IdentificationBusiness identBus;
 
 	public Result startIdentification() {
 		// Get the parsed JSON data
